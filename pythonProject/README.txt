@@ -68,6 +68,13 @@ The **Random Forest** classifier achieved the best performance:
 - Python 3.8+
 - pip package manager
 
+### ⚠️ Important Note About Model Files
+The trained model files (`best_model.joblib`, `tfidf_vectorizer.joblib`, `best_svm_model.joblib`) are not included in this repository due to GitHub's file size limits (108+ MB files). To use the applications:
+
+1. **Run the Jupyter notebook** `fakenewsdetection.ipynb` to train the models
+2. The notebook will automatically generate and save the required model files
+3. Once the models are trained, you can run the Streamlit app and Flask API
+
 ### 1. Clone/Download the Project
 ```bash
 git clone <repository-url>

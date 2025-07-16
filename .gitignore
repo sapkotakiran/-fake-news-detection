@@ -91,4 +91,9 @@ Thumbs.db
 
 # Large data files (optional - comment out if you want to include datasets)
 # *.csv
-# *.joblib
+*.joblib
+
+# Large model files
+best_model.joblib
+best_svm_model.joblib
+tfidf_vectorizer.joblib
