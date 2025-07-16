@@ -12,15 +12,24 @@ def download_nltk_data():
     try:
         nltk.data.find('corpora/stopwords')
     except LookupError:
-        nltk.download('stopwords')
+        nltk.download('stopwords', quiet=True)
     return set(stopwords.words('english'))
 
 # Load the model and vectorizer
 @st.cache_resource
 def load_model():
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    model = joblib.load(os.path.join(script_dir, "best_model.joblib"))
-    vectorizer = joblib.load(os.path.join(script_dir, "tfidf_vectorizer.joblib"))
+    model_path = os.path.join(script_dir, "best_model.joblib")
+    vectorizer_path = os.path.join(script_dir, "tfidf_vectorizer.joblib")
+    
+    # Check if model files exist
+    if not os.path.exists(model_path) or not os.path.exists(vectorizer_path):
+        st.error("🚨 Model files not found! Please run the Jupyter notebook first to train the models.")
+        st.info("📝 To use this app: Run `fakenewsdetection.ipynb` to generate the required model files.")
+        st.stop()
+    
+    model = joblib.load(model_path)
+    vectorizer = joblib.load(vectorizer_path)
     return model, vectorizer
 
 def preprocess_text(text, stop_words):
